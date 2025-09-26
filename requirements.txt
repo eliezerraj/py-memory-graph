@@ -1,0 +1,6 @@
+fastapi
+gunicorn
+uvicorn
+dotenv
+neo4j
+
