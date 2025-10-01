@@ -4,6 +4,7 @@ from app.config import settings
 from fastapi import FastAPI, HTTPException, Depends
 
 from app.entities import DataGraph
+from app.entities import DataModelGraph
 from app.entities import Account
 from app.entities import Person
 
@@ -29,12 +30,6 @@ def get_graph_repository() -> Neo4jGraphRepository:
 def get_info():
     return settings
 
-@app.post("/graph", response_model=DataGraph)
-def create_graph(data_graph: DataGraph, repository: Neo4jGraphRepository = Depends(get_graph_repository)):
-    """Create a new graph."""
-
-    return GraphService(repository).add_graph(data_graph)
-
 @app.get("/account/person/{person_id}", response_model=list[Account])
 def get_account_from_person(person_id: str, repository: Neo4jGraphRepository = Depends(get_graph_repository)):
     """Get all accounts from given a person."""
@@ -46,3 +41,10 @@ def get_person_from_account(account_id: str, repository: Neo4jGraphRepository = 
     """Get the persom from given an account."""
 
     return GraphService(repository).get_person_from_account(account_id)
+
+#------------------------------
+@app.post("/graph", response_model=DataModelGraph)
+def create_graph(data_graph: DataModelGraph, repository: Neo4jGraphRepository = Depends(get_graph_repository)):
+    """Create a new card graph."""
+
+    return GraphService(repository).add_graph(data_graph)
