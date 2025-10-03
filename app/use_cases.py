@@ -71,6 +71,7 @@ class GraphService:
     def add_graph(self, data_graph: DataModelGraph) -> DataModelGraph:
         """Add nodes and their relationship to the repository (generic)."""
         
+        print('\033[1;33m =.=.= \033[0m' * 15)
         logger.info("function => add_graph()")
         logger.info(f"data_graph: {data_graph}")
 
